@@ -3,7 +3,7 @@ export default {
   name: "tutorial-item-create-and-edit-dialog",
   components: {CreateAndEdit},
   props: {
-    tutorial: null,
+    item: null,
     visible: Boolean,
     statuses: Array
   },
@@ -27,9 +27,10 @@ export default {
       this.$emit('canceled');
     },
     savedEventHandler() {
+      console.log(this.item);
       this.submitted = true;
-      if (this.tutorial.title) {
-        this.$emit('saved', this.tutorial);
+      if (this.item.title) {
+        this.$emit('saved', this.item);
       }
     }
   }
@@ -37,33 +38,33 @@ export default {
 </script>
 
 <template>
-  <create-and-edit :entity="tutorial" :visile="visible" enitityName="Tutorial" @canceled="canceledEventHandler"
+  <create-and-edit :entity="item" :visile="visible" enitityName="Tutorial" @canceled="canceledEventHandler"
                    @saved="savedEventHandler">
     <template #content>
       <div class="p-fluid">
         <div class="field mt-5">
           <pv-float-label>
             <label for="title">Title</label>
-            <pv-input-text id="title" v-model="tutorial.title" :class="{'p-invalid': submitted && !tutorial.title}"/>
-            <small v-if="submitted && !tutorial.title" class="p-invalid">Title is required.</small>
+            <pv-input-text id="title" v-model="item.title" :class="{'p-invalid': submitted && !tutorial.title}"/>
+            <small v-if="submitted && !item.title" class="p-invalid">Title is required.</small>
           </pv-float-label>
         </div>
         <div class="p-field mt-5">
           <pv-float-label>
             <label for="description">Description</label>
-            <input id="description" v-model="tutorial.description" class="p-inputtext p-component" type="text"/>
+            <input id="description" v-model="item.description" class="p-inputtext p-component" type="text"/>
           </pv-float-label>
         </div>
         <div class="p-field mt-5">
           <pv-float-label>
             <label for="description">Description</label>
-            <input id="description" v-model="tutorial.description" class="p-inputtext p-component" type="text"/>
+            <input id="description" v-model="item.description" class="p-inputtext p-component" type="text"/>
           </pv-float-label>
         </div>
         <div class="p-field mt-5">
           <pv-float-label>
             <label for="status">Status</label>
-            <pv-dropdown id="published" v-model="tutorial.status" :options="statuses" optionLabel="label" placeholder="Select and Status">
+            <pv-dropdown id="published" v-model="item.status" :options="statuses" optionLabel="label" placeholder="Select and Status">
               <template #value="slotProps">
                 <div v-if="slotProps.value && slotProps.value.value">
                   <pv-tag :severity="getSeverity(slotProps.value.label)" :value="slotProps.value.value"/>
