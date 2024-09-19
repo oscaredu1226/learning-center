@@ -30,10 +30,12 @@ import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
+import DialogService from "primevue/dialogservice";
 
 createApp(App)
     .use(router)
     .use(PrimeVue, { ripple: true })
+    .use(DialogService)
     .use(ConfirmationService)
     .use(ToastService)
     .component('pv-button', Button)
