@@ -3,6 +3,7 @@ import {FilterMatchMode} from "primevue/api";
 
 export default {
   name: "data-manager",
+  inheritAttrs: false,
   props: {
     items: {type: Array, required: true},
     title: {type: { singular: '', plural: ''}, required: true},
